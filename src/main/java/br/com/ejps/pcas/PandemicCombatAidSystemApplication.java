@@ -1,4 +1,4 @@
-package br.com.ejps.pandemiccombataidsystem;
+package br.com.ejps.pcas;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

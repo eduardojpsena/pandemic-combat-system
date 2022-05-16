@@ -1,4 +1,4 @@
-package br.com.ejps.pandemiccombataidsystem.model.enumeration;
+package br.com.ejps.pcas.model.enumeration;
 
 import lombok.Getter;
 import lombok.Setter;

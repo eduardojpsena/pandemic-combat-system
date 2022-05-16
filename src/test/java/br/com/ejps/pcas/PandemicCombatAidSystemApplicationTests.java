@@ -1,4 +1,4 @@
-package br.com.ejps.pandemiccombataidsystem;
+package br.com.ejps.pcas;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

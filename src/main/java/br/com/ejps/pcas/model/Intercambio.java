@@ -1,4 +1,4 @@
-package br.com.ejps.pandemiccombataidsystem.model;
+package br.com.ejps.pcas.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -14,7 +14,7 @@ import java.util.List;
 @Table(name = "intercambio")
 @Getter @Setter
 @NoArgsConstructor @AllArgsConstructor
-public class IntercambioRecursos implements Serializable {
+public class Intercambio implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -29,18 +29,9 @@ public class IntercambioRecursos implements Serializable {
     @JoinColumn(name = "hospital_destino_id")
     private Hospital hospitalDestino;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE})
-    @JoinTable(name = "recursos_enviados_intercambio",
-            joinColumns = {@JoinColumn(name = "intercambio_id")},
-            inverseJoinColumns = {@JoinColumn(name = "recurso_id")})
-    private List<Recurso> recursosEnviados;
-
-    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE})
-    @JoinTable(name = "recursos_recebidos_intercambio",
-            joinColumns = {@JoinColumn(name = "intercambio_id")},
-            inverseJoinColumns = {@JoinColumn(name = "recurso_id")})
-    private List<Recurso> recursosRecebidos;
-
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataIntercambio;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "intercambio", cascade = CascadeType.ALL)
+    private List<TransacaoRecurso> transacaoRecursos;
 }

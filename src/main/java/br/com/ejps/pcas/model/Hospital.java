@@ -1,4 +1,4 @@
-package br.com.ejps.pandemiccombataidsystem.model;
+package br.com.ejps.pcas.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
