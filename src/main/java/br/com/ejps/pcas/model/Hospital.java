@@ -23,9 +23,9 @@ public class Hospital implements Serializable {
     private String nome;
     private String cnpj;
     private String endereco;
-    private String latitude;
-    private String longitude;
-    private Float ocupacao;
+    private Double latitude;
+    private Double longitude;
+    private Double ocupacao;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "hospital", cascade = CascadeType.ALL)
     private List<Recurso> recursos;

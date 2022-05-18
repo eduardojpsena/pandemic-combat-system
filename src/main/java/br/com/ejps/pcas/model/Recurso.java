@@ -1,5 +1,6 @@
 package br.com.ejps.pcas.model;
 
+import br.com.ejps.pcas.model.enumeration.TipoRecurso;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,21 +12,38 @@ import java.io.Serializable;
 @Entity
 @Table(name = "recurso")
 @Getter @Setter
-@NoArgsConstructor @AllArgsConstructor
+@NoArgsConstructor
 public class Recurso implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Getter @Setter private Long id;
 
-    private String nome;
+    @Getter @Setter private String nome;
     private Integer tipoRecurso;
-    private Integer quantidade;
+    @Getter @Setter private Integer quantidade;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinColumn(name="hospital_id")
-    private Hospital hospital;
+    @Getter @Setter private Hospital hospital;
 
+    public Recurso(Long id, String nome, TipoRecurso tipoRecurso, Integer quantidade, Hospital hospital) {
+        this.id = id;
+        this.nome = nome;
+        setTipoRecurso(tipoRecurso);
+        this.quantidade = quantidade;
+        this.hospital = hospital;
+    }
+
+    public TipoRecurso getTipoRecurso() {
+        return TipoRecurso.valueOf(tipoRecurso);
+    }
+
+    public void setTipoRecurso(TipoRecurso tipoRecurso) {
+        if (tipoRecurso != null) {
+            this.tipoRecurso = tipoRecurso.getCodigo();
+        }
+    }
 
 }
