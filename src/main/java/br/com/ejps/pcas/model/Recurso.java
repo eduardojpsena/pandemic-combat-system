@@ -36,6 +36,13 @@ public class Recurso implements Serializable {
         this.hospital = hospital;
     }
 
+    public Recurso(String nome, TipoRecurso tipoRecurso, Integer quantidade, Hospital hospital) {
+        this.nome = nome;
+        setTipoRecurso(tipoRecurso);
+        this.quantidade = quantidade;
+        this.hospital = hospital;
+    }
+
     public TipoRecurso getTipoRecurso() {
         return TipoRecurso.valueOf(tipoRecurso);
     }
