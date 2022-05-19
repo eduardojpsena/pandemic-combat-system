@@ -24,4 +24,9 @@ public class TransacaoRecurso implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     private Intercambio intercambio;
+
+    public TransacaoRecurso(Recurso recurso, Intercambio intercambio) {
+        this.recurso = recurso;
+        this.intercambio = intercambio;
+    }
 }

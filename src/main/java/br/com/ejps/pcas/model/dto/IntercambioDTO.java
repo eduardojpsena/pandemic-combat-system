@@ -1,9 +1,16 @@
 package br.com.ejps.pcas.model.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import java.util.List;
 
+@Getter @Setter
+@NoArgsConstructor @AllArgsConstructor
 public class IntercambioDTO {
 
-    private String hospitalId;
-    private List<String> transacoes;
+    private Long hospitalId;
+    private List<Long> recursosId;
 }

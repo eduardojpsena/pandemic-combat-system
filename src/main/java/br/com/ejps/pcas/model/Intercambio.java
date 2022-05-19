@@ -34,4 +34,9 @@ public class Intercambio implements Serializable {
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "intercambio", cascade = CascadeType.ALL)
     private List<TransacaoRecurso> transacaoRecursos;
+
+    public Intercambio(Hospital hospitalOrigem, Hospital hospitalDestino) {
+        this.hospitalOrigem = hospitalOrigem;
+        this.hospitalDestino = hospitalDestino;
+    }
 }

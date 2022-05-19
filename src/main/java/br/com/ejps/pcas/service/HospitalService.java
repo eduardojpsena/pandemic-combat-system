@@ -6,11 +6,13 @@ import br.com.ejps.pcas.model.dto.HospitalDTO;
 import br.com.ejps.pcas.model.dto.PercentualOcupacaoDTO;
 import br.com.ejps.pcas.repository.HospitalRepository;
 import br.com.ejps.pcas.repository.RecursoRepository;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Service
 public class HospitalService {
 
     private HospitalRepository repository;
