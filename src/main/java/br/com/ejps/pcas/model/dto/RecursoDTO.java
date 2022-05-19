@@ -11,7 +11,6 @@ public class RecursoDTO {
 
     @Getter @Setter private String nome;
     private Integer tipoRecurso;
-    @Getter @Setter private Integer quantidade;
 
     public RecursoDTO(String nome, TipoRecurso tipoRecurso) {
         this.nome = nome;

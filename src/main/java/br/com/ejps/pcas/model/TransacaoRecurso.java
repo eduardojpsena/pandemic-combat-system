@@ -1,5 +1,6 @@
 package br.com.ejps.pcas.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,6 +24,7 @@ public class TransacaoRecurso implements Serializable {
     private Recurso recurso;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @JsonIgnore
     private Intercambio intercambio;
 
     public TransacaoRecurso(Recurso recurso, Intercambio intercambio) {

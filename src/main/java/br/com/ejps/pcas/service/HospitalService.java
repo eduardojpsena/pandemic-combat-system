@@ -42,7 +42,6 @@ public class HospitalService {
         List<Recurso> recursos = dto.getRecursos().stream()
                 .map(recurso -> new Recurso(recurso.getNome(),
                                             recurso.getTipoRecurso(),
-                                            recurso.getQuantidade(),
                                             hospital))
                 .collect(Collectors.toList());
 

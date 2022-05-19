@@ -29,17 +29,17 @@ public class Hospital implements Serializable {
     private Double ocupacao;
     private LocalDateTime dataAttOcupacao;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "hospital", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "hospital")
     private List<Recurso> recursos;
 
-    public Hospital(String nome, String cnpj, String endereco, Double latitude, Double longitude, Double ocupacao, LocalDateTime dataAttOcupacao) {
+    public Hospital(String nome, String cnpj, String endereco, Double latitude,
+                    Double longitude, Double ocupacao, LocalDateTime dataAttOcupacao) {
         this.nome = nome;
         this.cnpj = cnpj;
         this.endereco = endereco;
         this.latitude = latitude;
         this.longitude = longitude;
         this.ocupacao = ocupacao;
-        this.recursos = recursos;
         this.dataAttOcupacao = dataAttOcupacao;
     }
 }

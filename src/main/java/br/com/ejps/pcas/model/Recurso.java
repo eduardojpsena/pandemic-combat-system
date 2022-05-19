@@ -1,6 +1,7 @@
 package br.com.ejps.pcas.model;
 
 import br.com.ejps.pcas.model.enumeration.TipoRecurso;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,7 +12,6 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "recurso")
-@Getter @Setter
 @NoArgsConstructor
 public class Recurso implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -22,24 +22,25 @@ public class Recurso implements Serializable {
 
     @Getter @Setter private String nome;
     private Integer tipoRecurso;
-    @Getter @Setter private Integer quantidade;
+    @Getter @Setter private Integer valorRecurso;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinColumn(name="hospital_id")
+    @JsonIgnore
     @Getter @Setter private Hospital hospital;
 
-    public Recurso(Long id, String nome, TipoRecurso tipoRecurso, Integer quantidade, Hospital hospital) {
+    public Recurso(Long id, String nome, TipoRecurso tipoRecurso, Hospital hospital) {
         this.id = id;
         this.nome = nome;
         setTipoRecurso(tipoRecurso);
-        this.quantidade = quantidade;
+        setValorRecurso(tipoRecurso.getPontos());
         this.hospital = hospital;
     }
 
-    public Recurso(String nome, TipoRecurso tipoRecurso, Integer quantidade, Hospital hospital) {
+    public Recurso(String nome, TipoRecurso tipoRecurso, Hospital hospital) {
         this.nome = nome;
         setTipoRecurso(tipoRecurso);
-        this.quantidade = quantidade;
+        setValorRecurso(tipoRecurso.getPontos());
         this.hospital = hospital;
     }
 

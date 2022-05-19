@@ -15,6 +15,9 @@ import br.com.ejps.pcas.repository.TransacaoRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.xml.crypto.Data;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -94,6 +97,8 @@ public class IntercambioService {
 
         intercambioHospitalOrigem.setTransacaoRecursos(transacoesHospitalOrigem);
         intercambioHospitalDestino.setTransacaoRecursos(transacoesHospitalDestino);
+        intercambioHospitalOrigem.setDataIntercambio(new Date());
+        intercambioHospitalDestino.setDataIntercambio(new Date());
         //--------------------------------------------------------------------------------------
 
         repository.save(intercambioHospitalOrigem);
