@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -26,11 +27,12 @@ public class Hospital implements Serializable {
     private Double latitude;
     private Double longitude;
     private Double ocupacao;
+    private LocalDateTime dataAttOcupacao;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "hospital", cascade = CascadeType.ALL)
     private List<Recurso> recursos;
 
-    public Hospital(String nome, String cnpj, String endereco, Double latitude, Double longitude, Double ocupacao) {
+    public Hospital(String nome, String cnpj, String endereco, Double latitude, Double longitude, Double ocupacao, LocalDateTime dataAttOcupacao) {
         this.nome = nome;
         this.cnpj = cnpj;
         this.endereco = endereco;
@@ -38,5 +40,6 @@ public class Hospital implements Serializable {
         this.longitude = longitude;
         this.ocupacao = ocupacao;
         this.recursos = recursos;
+        this.dataAttOcupacao = dataAttOcupacao;
     }
 }

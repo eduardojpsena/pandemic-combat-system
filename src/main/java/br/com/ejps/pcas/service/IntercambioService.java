@@ -36,7 +36,8 @@ public class IntercambioService {
 
     public List<Recurso> buscarRecursos(Hospital hospitalOrigem, List<Long> recursosHospitalOrigemId) {
         return recursosHospitalOrigemId.stream()
-                .map(recursoId -> recursoRepository.findByIdAndHospital(recursoId, hospitalOrigem).get())
+                .map(recursoId -> recursoRepository.findByIdAndHospital(recursoId, hospitalOrigem)
+                        .orElseThrow(() -> new ApiRequestException("Não foi possível encontrar o recurso com ID: " + recursoId)))
                 .collect(Collectors.toList());
     }
 
@@ -66,16 +67,16 @@ public class IntercambioService {
 
         if ((hospitalOrigem.getOcupacao() >= 90) &&
                 (valorRecursosHospitalOrigem > valorRecursosHospitalDestino)) {
-            throw new ApiRequestException("");
+            throw new ApiRequestException("O hospital solicitado não pode oferecer essa quantidade de recursos");
         }
         if ((hospitalDestino.getOcupacao() >= 90) &&
                 (valorRecursosHospitalDestino > valorRecursosHospitalOrigem)) {
-            throw new ApiRequestException("");
+            throw new ApiRequestException("O hospital de destino não pode oferecer essa quantidade de recursos");
         }
         if ((hospitalOrigem.getOcupacao() < 90) &&
                 (hospitalDestino.getOcupacao() < 90) &&
                     (valorRecursosHospitalOrigem != valorRecursosHospitalDestino)) {
-            throw new ApiRequestException("");
+            throw new ApiRequestException("Os valores dos recursos devem ser equivalentes");
         }
         //--------------------------------------------------------------------------------------
 

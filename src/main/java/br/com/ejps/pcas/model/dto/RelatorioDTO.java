@@ -14,9 +14,9 @@ import java.util.List;
 public class RelatorioDTO {
 
     private Double porcentagemHospitaisSuperlotados;
-    private Double porcentagemHospitaisVagos;
+    private Double porcentagemHospitaisSublotados;
     private Hospital hospitalSuperlotadoMaisTempo;
-    private Hospital hospitalVagoMaisTempo;
+    private Hospital hospitalSublotadoMaisTempo;
     private List<MediaRecursosDTO> mediaRecursos;
     private List<Intercambio> historicoIntercambios;
 

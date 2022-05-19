@@ -1,5 +1,6 @@
 package br.com.ejps.pcas.service;
 
+import br.com.ejps.pcas.exception.ApiRequestException;
 import br.com.ejps.pcas.model.Hospital;
 import br.com.ejps.pcas.model.Recurso;
 import br.com.ejps.pcas.model.dto.HospitalDTO;
@@ -9,6 +10,7 @@ import br.com.ejps.pcas.repository.RecursoRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -28,16 +30,20 @@ public class HospitalService {
     }
 
     public Hospital buscarPorId(Long id) {
-        return repository.findById(id).get();
+        return repository.findById(id)
+                .orElseThrow(() -> new ApiRequestException("Não foi possível encontrar o hospital com ID: " + id));
     }
 
     @Transactional
     public Hospital salvar(HospitalDTO dto) {
         Hospital hospital = new Hospital(dto.getNome(), dto.getCnpj(), dto.getEndereco(),
-                dto.getLatitude(), dto.getLongitude(), dto.getOcupacao());
+                dto.getLatitude(), dto.getLongitude(), dto.getOcupacao(), LocalDateTime.now());
 
         List<Recurso> recursos = dto.getRecursos().stream()
-                .map(recurso -> new Recurso(recurso.getNome(), recurso.getTipoRecurso(), recurso.getQuantidade(), hospital))
+                .map(recurso -> new Recurso(recurso.getNome(),
+                                            recurso.getTipoRecurso(),
+                                            recurso.getQuantidade(),
+                                            hospital))
                 .collect(Collectors.toList());
 
         hospital.setRecursos(recursos);
@@ -51,9 +57,11 @@ public class HospitalService {
 
     @Transactional
     public Hospital atualizarOcupacao(Long id, PercentualOcupacaoDTO percentualOcupacaoDTO) {
-        Hospital hospital = repository.findById(id).get();
+        Hospital hospital = repository.findById(id)
+                .orElseThrow(() -> new ApiRequestException("Não foi possível encontrar o hospital com ID:" + id));
 
         hospital.setOcupacao(percentualOcupacaoDTO.getOcupacao());
+        hospital.setDataAttOcupacao(LocalDateTime.now());
 
         return hospital;
     }
